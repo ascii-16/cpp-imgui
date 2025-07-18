@@ -3,7 +3,8 @@
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 #include <GLFW/glfw3.h>
-#include "Task.hpp"
+#include "task.hpp"
+#include "ui.hpp"
 
 int main()
 {
@@ -61,29 +62,7 @@ int main()
 
         if (ImGui::Button("Add Task"))
         {
-            static float posX = 0.0f;
-            static float posY = 0.0f;
-            float padding = 10.0f;
-            float regionWidth = ImGui::GetContentRegionAvail().x;
-            ImVec2 cardSize = ImVec2(200, 100);
-
-            if (posX + cardSize.x > regionWidth)
-            {
-                posX = 0.0f;
-                posY += cardSize.y + padding;
-            }
-
-            tasks.push_back(Task{
-                .title = titleBuffer,
-                .content = contentBuffer,
-                .position = ImVec2(posX, posY),
-                .color = color,
-                .completed = false});
-
-            posX += cardSize.x + padding;
-
-            titleBuffer[0] = '\0';
-            contentBuffer[0] = '\0';
+            add_task_button(tasks, titleBuffer, contentBuffer, color);
         }
 
         ImGui::BeginChild("TaskListRegion",
@@ -93,28 +72,7 @@ int main()
                               ImGuiWindowFlags_NoMove |
                               ImGuiWindowFlags_NoSavedSettings |
                               ImGuiWindowFlags_AlwaysUseWindowPadding);
-
-        for (size_t i = 0; i < tasks.size(); ++i)
-        {
-            ImGui::PushID(i);
-            Task &task = tasks[i];
-
-            ImGui::SetCursorPos(task.position);
-
-            ImGui::PushStyleColor(ImGuiCol_ChildBg, task.color);
-
-            ImGui::BeginChild("TaskCard", ImVec2(200, 100), true, ImGuiWindowFlags_NoMove);
-
-            ImGui::Text("%s", task.title.c_str());
-            ImGui::Separator();
-            ImGui::TextWrapped("%s", task.content.c_str());
-            ImGui::Checkbox("Done", &task.completed);
-
-            ImGui::EndChild();
-            ImGui::PopStyleColor();
-
-            ImGui::PopID();
-        }
+        render_task_list(tasks);
         ImGui::EndChild();
 
         ImGui::End();

@@ -1,0 +1,24 @@
+#include "ui.hpp"
+
+void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeight)
+{
+    for (size_t i = 0; i < tasks.size(); ++i)
+    {
+        ImGui::PushID(static_cast<int>(i));
+        Task &task = tasks[i];
+
+        ImGui::SetCursorPos(task.position);
+
+        ImGui::PushStyleColor(ImGuiCol_ChildBg, task.color);
+
+        ImGui::BeginChild("TaskCard", ImVec2(cardWidth, cardHeight), true, ImGuiWindowFlags_NoMove);
+        ImGui::Text("%s", task.title.c_str());
+        ImGui::Separator();
+        ImGui::TextWrapped("%s", task.content.c_str());
+        ImGui::Checkbox("Done", &task.completed);
+        ImGui::EndChild();
+
+        ImGui::PopStyleColor();
+        ImGui::PopID();
+    }
+}
