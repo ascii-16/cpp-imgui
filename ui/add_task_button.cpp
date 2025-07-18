@@ -2,17 +2,7 @@
 #include <sstream>
 #include "ui.hpp"
 #include "storage.hpp"
-
-std::string generate_uuid() {
-    std::stringstream ss;
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 15);
-    for (int i = 0; i < 32; ++i) {
-        ss << std::hex << dis(gen);
-    }
-    return ss.str();
-}
+#include "uuid.hpp"
 
 void add_task_button(std::vector<Task> &tasks, char *titleBuffer, char *contentBuffer, ImVec4 color) {
     if (ImGui::Button("Add Task")) {
