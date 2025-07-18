@@ -61,10 +61,8 @@ int main()
         ImGui::InputTextMultiline("Content", contentBuffer, IM_ARRAYSIZE(contentBuffer));
         ImGui::ColorEdit4("Color", (float *)&color);
 
-        if (ImGui::Button("Add Task"))
-        {
-            add_task_button(tasks, titleBuffer, contentBuffer, color);
-        }
+        
+        add_task_button(tasks, titleBuffer, contentBuffer, color);
 
         ImGui::BeginChild("TaskListRegion",
                           ImGui::GetContentRegionAvail(),
