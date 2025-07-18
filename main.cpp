@@ -5,10 +5,11 @@
 #include <GLFW/glfw3.h>
 #include "task.hpp"
 #include "ui.hpp"
+#include "storage.hpp"
 
 int main()
 {
-    std::vector<Task> tasks;
+    std::vector<Task> tasks = load_tasks("tasks.json");
 
     static char titleBuffer[128] = "";
     static char contentBuffer[256] = "";

@@ -1,4 +1,5 @@
 #include "ui.hpp"
+#include "storage.hpp"
 
 void add_task_button(std::vector<Task> &tasks, char *titleBuffer, char *contentBuffer, ImVec4 color)
 {
@@ -25,4 +26,6 @@ void add_task_button(std::vector<Task> &tasks, char *titleBuffer, char *contentB
 
     titleBuffer[0] = '\0';
     contentBuffer[0] = '\0';
+
+    save_tasks(tasks, "tasks.json");
 }

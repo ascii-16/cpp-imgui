@@ -11,6 +11,7 @@ pkg_search_module(GLFW REQUIRED glfw3)
 
 include_directories(${GLFW_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/ui)
+include_directories(${CMAKE_SOURCE_DIR}/lib)
 link_directories(${GLFW_LIBRARY_DIRS})
 
 find_package(OpenGL REQUIRED)
@@ -26,13 +27,18 @@ file(GLOB IMGUI_SOURCES
 file(GLOB UI_SOURCES "ui/*.cpp")
 file(GLOB UI_HEADERS "ui/*.hpp")
 
+# Lib
+file(GLOB LIB_SOURCES "lib/*.cpp")
+file(GLOB LIb_HEADERS "lib/*.hpp")
+
 include_directories(
     vendor/imgui
     vendor/imgui/backends
+    external
     ${GLFW_INCLUDE_DIRS}
 )
 
-add_executable(ImGuiApp main.cpp ${UI_SOURCES} ${UI_HEADERS} ${IMGUI_SOURCES})
+add_executable(ImGuiApp main.cpp ${UI_SOURCES} ${UI_HEADERS} ${LIB_SOURCES} ${LIB_HEADERS} ${IMGUI_SOURCES})
 
 target_include_directories(ImGuiApp PRIVATE ${CMAKE_SOURCE_DIR})
 
