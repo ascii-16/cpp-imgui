@@ -63,16 +63,7 @@ int main()
 
         
         add_task_button(tasks, titleBuffer, contentBuffer, color);
-
-        ImGui::BeginChild("TaskListRegion",
-                          ImGui::GetContentRegionAvail(),
-                          false,
-                          ImGuiWindowFlags_NoResize |
-                              ImGuiWindowFlags_NoMove |
-                              ImGuiWindowFlags_NoSavedSettings |
-                              ImGuiWindowFlags_AlwaysUseWindowPadding);
         render_task_list(tasks);
-        ImGui::EndChild();
 
         ImGui::End();
 

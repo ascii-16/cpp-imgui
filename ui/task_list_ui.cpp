@@ -3,6 +3,14 @@
 
 void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeight)
 {
+    ImGui::BeginChild("TaskListRegion",
+                      ImGui::GetContentRegionAvail(),
+                      false,
+                      ImGuiWindowFlags_NoResize |
+                          ImGuiWindowFlags_NoMove |
+                          ImGuiWindowFlags_NoSavedSettings |
+                          ImGuiWindowFlags_AlwaysUseWindowPadding);
+
     for (size_t i = 0; i < tasks.size(); ++i)
     {
         ImGui::PushID(static_cast<int>(i));
@@ -20,7 +28,7 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
 
         if (ImGui::Button("Delete"))
         {
-           delete_task(tasks, task.id);
+            delete_task(tasks, task.id);
         }
 
         ImGui::EndChild();
@@ -28,4 +36,6 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         ImGui::PopStyleColor();
         ImGui::PopID();
     }
+
+    ImGui::EndChild();
 }
