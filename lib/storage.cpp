@@ -21,7 +21,7 @@ void save_tasks(const std::vector<Task> &tasks, const std::string &filename) {
     }
 }
 
-bool update_task(std::vector<Task> &tasks, int taskId, const Task &updatedTask) {
+bool update_task(std::vector<Task> &tasks, std::string taskId, const Task &updatedTask) {
     for (Task &task : tasks) {
         if (task.id == taskId) {
             task.title = updatedTask.title;
@@ -36,7 +36,7 @@ bool update_task(std::vector<Task> &tasks, int taskId, const Task &updatedTask) 
     return false;
 }
 
-bool delete_task(std::vector<Task> &tasks, int taskId) {
+bool delete_task(std::vector<Task> &tasks, std::string taskId) {
     tasks.erase(std::remove_if(tasks.begin(), tasks.end(), [taskId](const Task &task) { return task.id == taskId; }),
                 tasks.end());
     save_tasks(tasks);
