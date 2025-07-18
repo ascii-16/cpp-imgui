@@ -1,3 +1,4 @@
+#include <vector>
 #include "imgui.h"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
@@ -6,7 +7,12 @@
 
 int main()
 {
-    Task task;
+    std::vector<Task> tasks;
+
+    static char titleBuffer[128] = "";
+    static char contentBuffer[256] = "";
+    static ImVec4 color = ImVec4(0.5f, 0.8f, 0.5f, 1.0f);
+    static ImVec2 position = ImVec2(50, 50);
 
     if (!glfwInit())
         return -1;
@@ -40,15 +46,49 @@ int main()
         ImGui_ImplGlfw_NewFrame();
 
         ImGui::NewFrame();
-        ImGui::Begin("Task");
-        ImGui::Checkbox("completed", &task.completed);
-        ImGui::SameLine();
-        ImGui::Text("%s", task.title.c_str());
+        ImGui::Begin("Task Manager");
 
-        if (ImGui::Button("Delete"))
+        ImGui::InputText("Title", titleBuffer, IM_ARRAYSIZE(titleBuffer));
+        ImGui::InputTextMultiline("Content", contentBuffer, IM_ARRAYSIZE(contentBuffer));
+        ImGui::ColorEdit4("Color", (float *)&color);
+        ImGui::SliderFloat2("Position", (float *)&position, 0.0f, 500.0f);
+
+        if (ImGui::Button("Add Task"))
         {
-            task.title = "[Deleted]";
+            tasks.push_back(Task{
+                .title = titleBuffer,
+                .content = contentBuffer,
+                .position = position,
+                .color = color,
+                .completed = false});
+
+            titleBuffer[0] = '\0';
+            contentBuffer[0] = '\0';
         }
+
+        ImGui::BeginChild("TaskListRegion", ImVec2(0, 300), true);
+        for (size_t i = 0; i < tasks.size(); ++i)
+        {
+            ImGui::PushID(i);
+            Task &task = tasks[i];
+
+            ImGui::SetCursorPos(task.position);
+
+            ImGui::PushStyleColor(ImGuiCol_ChildBg, task.color);
+
+            ImGui::BeginChild("TaskCard", ImVec2(200, 100), true, ImGuiWindowFlags_NoMove);
+
+            ImGui::Text("%s", task.title.c_str());
+            ImGui::Separator();
+            ImGui::TextWrapped("%s", task.content.c_str());
+            ImGui::Checkbox("Done", &task.completed);
+
+            ImGui::EndChild();
+            ImGui::PopStyleColor();
+
+            ImGui::PopID();
+        }
+        ImGui::EndChild();
 
         ImGui::End();
 
