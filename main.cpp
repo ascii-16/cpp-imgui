@@ -46,7 +46,14 @@ int main()
         ImGui_ImplGlfw_NewFrame();
 
         ImGui::NewFrame();
-        ImGui::Begin("Task Manager");
+        ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+
+        ImGui::Begin("Task Manager", nullptr,
+                     ImGuiWindowFlags_NoResize |
+                         ImGuiWindowFlags_NoCollapse |
+                         ImGuiWindowFlags_NoMove |
+                         ImGuiWindowFlags_NoSavedSettings);
 
         ImGui::InputText("Title", titleBuffer, IM_ARRAYSIZE(titleBuffer));
         ImGui::InputTextMultiline("Content", contentBuffer, IM_ARRAYSIZE(contentBuffer));
@@ -79,7 +86,14 @@ int main()
             contentBuffer[0] = '\0';
         }
 
-        ImGui::BeginChild("TaskListRegion", ImVec2(0, 300), true);
+        ImGui::BeginChild("TaskListRegion",
+                          ImGui::GetContentRegionAvail(),
+                          false,
+                          ImGuiWindowFlags_NoResize |
+                              ImGuiWindowFlags_NoMove |
+                              ImGuiWindowFlags_NoSavedSettings |
+                              ImGuiWindowFlags_AlwaysUseWindowPadding);
+
         for (size_t i = 0; i < tasks.size(); ++i)
         {
             ImGui::PushID(i);
