@@ -1,4 +1,5 @@
 #include "ui.hpp"
+#include "storage.hpp"
 
 void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeight)
 {
@@ -16,6 +17,12 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         ImGui::Separator();
         ImGui::TextWrapped("%s", task.content.c_str());
         ImGui::Checkbox("Done", &task.completed);
+
+        if (ImGui::Button("Delete"))
+        {
+           delete_task(tasks, task.id);
+        }
+
         ImGui::EndChild();
 
         ImGui::PopStyleColor();

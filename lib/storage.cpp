@@ -23,6 +23,33 @@ void save_tasks(const std::vector<Task> &tasks, const std::string &filename) {
     }
 }
 
+bool update_task(std::vector<Task> &tasks, int taskId, const Task &updatedTask)
+{
+  for (Task &task : tasks) {
+    if (task.id == taskId)
+    {
+      task.title = updatedTask.title;
+      task.content = updatedTask.content;
+      task.position = updatedTask.position;
+      task.color = updatedTask.color;
+      task.completed = updatedTask.completed;
+      save_tasks(tasks);
+      return true;
+    }
+  }
+  return false;
+}
+
+bool delete_task(std::vector<Task> &tasks, int taskId)
+{
+  tasks.erase(
+      std::remove_if(tasks.begin(), tasks.end(), [taskId](const Task &task)
+                     { return task.id == taskId; }),
+      tasks.end());
+  save_tasks(tasks);
+  return true;
+}
+
 std::vector<Task> load_tasks(const std::string &filename) {
     std::vector<Task> tasks;
     std::ifstream file(filename);
