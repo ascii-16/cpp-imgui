@@ -7,8 +7,7 @@
 #include "ui.hpp"
 #include "storage.hpp"
 
-int main()
-{
+int main() {
     std::vector<Task> tasks = load_tasks("tasks.json");
 
     static char titleBuffer[128] = "";
@@ -34,15 +33,14 @@ int main()
 
     ImGui::CreateContext();
     ImGuiIO &io = ImGui::GetIO();
-    (void)io;
+    (void) io;
 
     ImGui::StyleColorsDark();
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 150");
 
-    while (!glfwWindowShouldClose(window))
-    {
+    while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
@@ -52,16 +50,13 @@ int main()
         ImGui::SetNextWindowPos(ImVec2(0, 0));
 
         ImGui::Begin("Task Manager", nullptr,
-                     ImGuiWindowFlags_NoResize |
-                         ImGuiWindowFlags_NoCollapse |
-                         ImGuiWindowFlags_NoMove |
+                     ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove |
                          ImGuiWindowFlags_NoSavedSettings);
 
         ImGui::InputText("Title", titleBuffer, IM_ARRAYSIZE(titleBuffer));
         ImGui::InputTextMultiline("Content", contentBuffer, IM_ARRAYSIZE(contentBuffer));
-        ImGui::ColorEdit4("Color", (float *)&color);
+        ImGui::ColorEdit4("Color", (float *) &color);
 
-        
         add_task_button(tasks, titleBuffer, contentBuffer, color);
         render_task_list(tasks);
 

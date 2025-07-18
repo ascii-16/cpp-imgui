@@ -1,18 +1,12 @@
 #include "ui.hpp"
 #include "storage.hpp"
 
-void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeight)
-{
-    ImGui::BeginChild("TaskListRegion",
-                      ImGui::GetContentRegionAvail(),
-                      false,
-                      ImGuiWindowFlags_NoResize |
-                          ImGuiWindowFlags_NoMove |
-                          ImGuiWindowFlags_NoSavedSettings |
+void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeight) {
+    ImGui::BeginChild("TaskListRegion", ImGui::GetContentRegionAvail(), false,
+                      ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings |
                           ImGuiWindowFlags_AlwaysUseWindowPadding);
 
-    for (size_t i = 0; i < tasks.size(); ++i)
-    {
+    for (size_t i = 0; i < tasks.size(); ++i) {
         ImGui::PushID(static_cast<int>(i));
         Task &task = tasks[i];
 
@@ -26,8 +20,7 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         ImGui::TextWrapped("%s", task.content.c_str());
         ImGui::Checkbox("Done", &task.completed);
 
-        if (ImGui::Button("Delete"))
-        {
+        if (ImGui::Button("Delete")) {
             delete_task(tasks, task.id);
         }
 
