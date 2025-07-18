@@ -16,6 +16,9 @@ link_directories(${GLFW_LIBRARY_DIRS})
 
 find_package(OpenGL REQUIRED)
 
+# Copy assets
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+
 # ImGui sources
 file(GLOB IMGUI_SOURCES
     vendor/imgui/*.cpp

@@ -1,7 +1,10 @@
 #include "ui.hpp"
 #include "storage.hpp"
+#include "image.hpp"
 
 void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeight) {
+    GLuint iconTex = LoadPNGTexture("assets/icons/delete.png");
+
     ImGui::BeginChild("TaskListRegion", ImGui::GetContentRegionAvail(), false,
                       ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings |
                           ImGuiWindowFlags_AlwaysUseWindowPadding);
@@ -20,7 +23,16 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         ImGui::TextWrapped("%s", task.content.c_str());
         ImGui::Checkbox("Done", &task.completed);
 
-        if (ImGui::Button("Delete")) {
+        // Delete Button
+        ImVec2 iconSize = ImVec2((float) 18, (float) 18);
+
+        ImVec2 pos = ImGui::GetCursorScreenPos();
+
+        ImGui::Image((ImTextureID) (intptr_t) iconTex, iconSize);
+
+        // Create invisible button over the image
+        ImGui::SetCursorScreenPos(pos);
+        if (ImGui::InvisibleButton("delete_button", iconSize)) {
             delete_task(tasks, task.id);
         }
 
