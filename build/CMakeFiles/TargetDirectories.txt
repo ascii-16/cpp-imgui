@@ -1,3 +1,0 @@
-/Users/akhilchandran/Documents/Projects/cpp-gui/build/CMakeFiles/ImGuiApp.dir
-/Users/akhilchandran/Documents/Projects/cpp-gui/build/CMakeFiles/edit_cache.dir
-/Users/akhilchandran/Documents/Projects/cpp-gui/build/CMakeFiles/rebuild_cache.dir
