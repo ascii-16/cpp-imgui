@@ -8,6 +8,7 @@ void save_tasks(const std::vector<Task> &tasks, const std::string &filename) {
     json j;
     for (const auto &task : tasks) {
         j.push_back({
+            {"id", task.id},
             {"title", task.title},
             {"content", task.content},
             {"position", {task.position.x, task.position.y}},

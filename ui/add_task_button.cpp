@@ -16,6 +16,7 @@ void add_task_button(std::vector<Task> &tasks, char *titleBuffer, char *contentB
     }
 
     tasks.push_back(Task{
+        .id = tasks.size() + 1,
         .title = titleBuffer,
         .content = contentBuffer,
         .position = ImVec2(posX, posY),

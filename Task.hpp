@@ -8,6 +8,7 @@ using json = nlohmann::json;
 
 struct Task
 {
+  size_t id;
   std::string title;
   std::string content;
   ImVec2 position;
