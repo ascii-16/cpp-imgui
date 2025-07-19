@@ -46,7 +46,10 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         ImGui::Text("%s", task.title.c_str());
         ImGui::Separator();
         ImGui::TextWrapped("%s", task.content.c_str());
-        ImGui::Checkbox("Done", &task.completed);
+
+        if (ImGui::Checkbox("Done", &task.completed)) {
+            update_task(tasks, task.id, task);
+        }
 
         delete_button(tasks, task.id);
 
