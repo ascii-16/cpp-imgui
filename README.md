@@ -46,6 +46,6 @@ A modern C++ GUI application using [Dear ImGui](https://github.com/ocornut/imgui
 - Platform-specific dependencies (e.g., OpenGL, SDL2, GLFW, etc. — see CMakeLists.txt)
 
 ## License
-This project is licensed under the MIT License. See [LICENSE](LICENSE.txt) for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
