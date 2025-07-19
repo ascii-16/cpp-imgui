@@ -33,8 +33,10 @@ int main() {
 
     ImGui::CreateContext();
     ImGuiIO &io = ImGui::GetIO();
+    io.Fonts->AddFontFromFileTTF("assets/fonts/Roboto-Regular.ttf", 18.0f);
     (void) io;
 
+    // ImGui::SFML::UpdateFontTexture(); 
     ImGui::StyleColorsDark();
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
