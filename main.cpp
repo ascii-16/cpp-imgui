@@ -54,13 +54,9 @@ int main() {
                      ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove |
                          ImGuiWindowFlags_NoSavedSettings);
 
+        // UI elements
         mode_toggle_button();
-
-        ImGui::InputText("Title", titleBuffer, IM_ARRAYSIZE(titleBuffer));
-        ImGui::InputTextMultiline("Content", contentBuffer, IM_ARRAYSIZE(contentBuffer));
-        ImGui::ColorEdit4("Color", (float *) &color);
-
-        add_task_button(tasks, titleBuffer, contentBuffer, color);
+        add_task_form(tasks, titleBuffer, contentBuffer, color);
         render_task_list(tasks);
 
         ImGui::End();
