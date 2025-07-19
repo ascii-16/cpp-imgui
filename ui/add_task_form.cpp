@@ -16,7 +16,7 @@
  * @param contentBuffer Character buffer for the task content input field (mutable).
  * @param color The color associated with the new task.
  */
-void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuffer, ImVec4 color) {
+void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuffer, ImVec4& color) {
     ImGui::InputText("Title", titleBuffer, IM_ARRAYSIZE(titleBuffer));
     ImGui::InputTextMultiline("Content", contentBuffer, IM_ARRAYSIZE(contentBuffer));
     ImGui::ColorEdit4("Color", (float *) &color);
