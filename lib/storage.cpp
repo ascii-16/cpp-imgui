@@ -10,7 +10,6 @@ void save_tasks(const std::vector<Task> &tasks, const std::string &filename) {
         j.push_back({{"id", task.id},
                      {"title", task.title},
                      {"content", task.content},
-                     {"position", {task.position.x, task.position.y}},
                      {"color", {task.color.x, task.color.y, task.color.z, task.color.w}},
                      {"completed", task.completed}});
     }
@@ -26,7 +25,6 @@ bool update_task(std::vector<Task> &tasks, std::string taskId, const Task &updat
         if (task.id == taskId) {
             task.title = updatedTask.title;
             task.content = updatedTask.content;
-            task.position = updatedTask.position;
             task.color = updatedTask.color;
             task.completed = updatedTask.completed;
             save_tasks(tasks);
@@ -55,7 +53,6 @@ std::vector<Task> load_tasks(const std::string &filename) {
         Task task;
         task.title = item["title"];
         task.content = item["content"];
-        task.position = ImVec2(item["position"][0], item["position"][1]);
         task.color = ImVec4(item["color"][0], item["color"][1], item["color"][2], item["color"][3]);
         task.completed = item["completed"];
         tasks.push_back(task);

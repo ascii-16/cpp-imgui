@@ -3,6 +3,12 @@
 #include "image.hpp"
 
 void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeight) {
+    float padding = 10.0f;
+    float regionWidth = ImGui::GetContentRegionAvail().x;
+    float posX = 0.0f;
+    float posY = 0.0f;
+
+    ImVec2 origin = ImGui::GetCursorScreenPos();
     GLuint iconTex = LoadPNGTexture("assets/icons/delete.png");
 
     ImGui::BeginChild("TaskListRegion", ImGui::GetContentRegionAvail(), false,
@@ -13,8 +19,14 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         ImGui::PushID(static_cast<int>(i));
         Task &task = tasks[i];
 
-        ImGui::SetCursorPos(task.position);
+        if (posX + cardWidth > regionWidth) {
+            posX = 0.0f;
+            posY += cardHeight + padding;
+        }
 
+        ImVec2 cardPos = ImVec2(origin.x + posX, origin.y + posY);
+
+        ImGui::SetCursorScreenPos(cardPos);
         ImGui::PushStyleColor(ImGuiCol_ChildBg, task.color);
 
         ImGui::BeginChild("TaskCard", ImVec2(cardWidth, cardHeight), true, ImGuiWindowFlags_NoMove);
@@ -37,8 +49,10 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         }
 
         ImGui::EndChild();
-
         ImGui::PopStyleColor();
+
+        posX += cardWidth + padding;
+
         ImGui::PopID();
     }
 
