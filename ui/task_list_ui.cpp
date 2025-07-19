@@ -2,6 +2,20 @@
 #include "storage.hpp"
 #include "image.hpp"
 
+void delete_button(std::vector<Task> &tasks, std::string task_id) {
+    GLuint iconTex = LoadPNGTexture("assets/icons/delete.png");
+    ImVec2 iconSize = ImVec2((float) 18, (float) 18);
+    ImVec2 pos = ImGui::GetCursorScreenPos();
+
+    ImGui::Image((ImTextureID) (intptr_t) iconTex, iconSize);
+
+    // Create invisible button over the image
+    ImGui::SetCursorScreenPos(pos);
+    if (ImGui::InvisibleButton("delete_button", iconSize)) {
+        delete_task(tasks, task_id);
+    }
+}
+
 void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeight) {
     float padding = 10.0f;
     float regionWidth = ImGui::GetContentRegionAvail().x;
@@ -9,7 +23,6 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
     float posY = 0.0f;
 
     ImVec2 origin = ImGui::GetCursorScreenPos();
-    GLuint iconTex = LoadPNGTexture("assets/icons/delete.png");
 
     ImGui::BeginChild("TaskListRegion", ImGui::GetContentRegionAvail(), false,
                       ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings |
@@ -35,18 +48,7 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         ImGui::TextWrapped("%s", task.content.c_str());
         ImGui::Checkbox("Done", &task.completed);
 
-        // Delete Button
-        ImVec2 iconSize = ImVec2((float) 18, (float) 18);
-
-        ImVec2 pos = ImGui::GetCursorScreenPos();
-
-        ImGui::Image((ImTextureID) (intptr_t) iconTex, iconSize);
-
-        // Create invisible button over the image
-        ImGui::SetCursorScreenPos(pos);
-        if (ImGui::InvisibleButton("delete_button", iconSize)) {
-            delete_task(tasks, task.id);
-        }
+        delete_button(tasks, task.id);
 
         ImGui::EndChild();
         ImGui::PopStyleColor();
