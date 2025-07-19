@@ -36,7 +36,6 @@ int main() {
     io.Fonts->AddFontFromFileTTF("assets/fonts/Roboto-Regular.ttf", 18.0f);
     (void) io;
 
-    // ImGui::SFML::UpdateFontTexture(); 
     ImGui::StyleColorsDark();
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -54,6 +53,8 @@ int main() {
         ImGui::Begin("Task Manager", nullptr,
                      ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove |
                          ImGuiWindowFlags_NoSavedSettings);
+
+        mode_toggle_button();
 
         ImGui::InputText("Title", titleBuffer, IM_ARRAYSIZE(titleBuffer));
         ImGui::InputTextMultiline("Content", contentBuffer, IM_ARRAYSIZE(contentBuffer));
