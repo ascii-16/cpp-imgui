@@ -25,7 +25,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-    GLFWwindow *window = glfwCreateWindow(1400, 900, "Sample GUI app", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(1400, 900, "ImGUI Task Manager", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
