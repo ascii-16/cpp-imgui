@@ -2,6 +2,15 @@
 #include "storage.hpp"
 #include "image.hpp"
 
+/**
+ * @brief Renders a delete button as an icon and handles task deletion logic.
+ *
+ * This function displays a delete icon for a task. When the icon is clicked, the corresponding task is removed
+ * from the provided tasks vector and persistent storage is updated.
+ *
+ * @param tasks Reference to the vector of Task objects.
+ * @param task_id The unique identifier of the task to be deleted.
+ */
 void delete_button(std::vector<Task> &tasks, std::string task_id) {
     GLuint iconTex = LoadPNGTexture("assets/icons/delete.png");
     ImVec2 iconSize = ImVec2((float) 18, (float) 18);
@@ -16,6 +25,17 @@ void delete_button(std::vector<Task> &tasks, std::string task_id) {
     }
 }
 
+/**
+ * @brief Renders the list of tasks as interactive cards in a grid layout.
+ *
+ * This function iterates over the provided tasks vector and displays each task as a card with its title, content,
+ * completion status, and a delete button. The layout is responsive to the available region width. Task completion
+ * and deletion are handled interactively, and changes are persisted.
+ *
+ * @param tasks Reference to the vector of Task objects to display and manage.
+ * @param cardWidth The width of each task card in the UI.
+ * @param cardHeight The height of each task card in the UI.
+ */
 void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeight) {
     float padding = 12.0f;
     float regionWidth = ImGui::GetContentRegionAvail().x;
