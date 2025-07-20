@@ -17,6 +17,7 @@
  * @param color The color associated with the new task.
  */
 void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuffer, ImVec4 &color) {
+    // TODO: get rid of IM_ARRAYSIZE and use template/ pass buffer size explicitily instead
     ImGui::InputText("Title", titleBuffer, IM_ARRAYSIZE(titleBuffer));
     ImGui::InputTextMultiline("Content", contentBuffer, IM_ARRAYSIZE(contentBuffer));
     ImGui::ColorEdit4("Color", (float *) &color);
