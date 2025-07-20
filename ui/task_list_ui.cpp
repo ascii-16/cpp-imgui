@@ -174,16 +174,18 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(18, 16));
         ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0, 0, 0, 0));
 
+        // Card Padding X
         ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 18);
-        ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 16);
 
         ImGui::BeginChild("TaskCard", ImVec2(cardWidth, cardHeight), false,
                           ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings);
 
+        // Dummy padding for Y
+        ImGui::Dummy(ImVec2(0.0f, padding));
+
         // Title with completion styling
         float titleAlpha = task.completed ? 0.6f : 1.0f;
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, titleAlpha));
-
         // Strikethrough effect for completed tasks
         if (task.completed) {
             ImVec2 titlePos = ImGui::GetCursorScreenPos();
