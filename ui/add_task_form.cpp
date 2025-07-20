@@ -21,7 +21,7 @@ void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuf
     ImGui::InputTextMultiline("Content", contentBuffer, IM_ARRAYSIZE(contentBuffer));
     ImGui::ColorEdit4("Color", (float *) &color);
     if (ImGui::Button("Add Task")) {
-        tasks.push_back(Task{
+        tasks.insert(tasks.begin(), Task{
             .id = generate_uuid(), .title = titleBuffer, .content = contentBuffer, .color = color, .completed = false});
 
         titleBuffer[0] = '\0';
