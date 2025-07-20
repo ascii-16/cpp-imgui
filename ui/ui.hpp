@@ -10,7 +10,7 @@
  * application UI. The current mode is tracked using a static boolean. When toggled, the ImGui style is updated
  * accordingly.
  */
-void render_task_list(std::vector<Task> &tasks, float cardWidth = 200.0f, float cardHeight = 100.0f);
+void render_task_list(std::vector<Task> &tasks, float cardWidth = 220.0f, float cardHeight = 120.0f);
 
 /**
  * @brief Renders the form UI for adding a new task and handles its submission logic.
