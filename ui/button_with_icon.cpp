@@ -18,6 +18,8 @@ bool button_with_icon(const char *iconPath, const char *text, ImVec2 iconSize, f
     ImVec2 textPos = ImVec2(iconEnd.x + spacing, cursor.y + padding.y);
     ImU32 bgColor = (ImGui::IsItemHovered() || ImGui::IsItemActive()) ? hoverColor : buttonColor;
 
+    ImGui::SetWindowFontScale(0.9f);
+
     // Draw button with bg color
     ImGui::GetWindowDrawList()->AddRectFilled(cursor, ImVec2(cursor.x + buttonSize.x, cursor.y + buttonSize.y), bgColor,
                                               4.0f);
@@ -27,6 +29,8 @@ bool button_with_icon(const char *iconPath, const char *text, ImVec2 iconSize, f
 
     // Draw text
     ImGui::GetWindowDrawList()->AddText(textPos, ImGui::GetColorU32(ImGuiCol_Text), text);
+
+    ImGui::SetWindowFontScale(1.0f);
 
     return pressed;
 }

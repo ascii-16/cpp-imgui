@@ -52,6 +52,6 @@ void mode_toggle_button();
  *
  * @return true if the button is clicked (pressed), false otherwise.
  */
-bool button_with_icon(const char *iconTex, const char *text, ImVec2 iconSize = ImVec2((float) 18, (float) 18),
-                      float spacing = 6.0f, ImVec2 padding = ImVec2((float) 20, (float) 12),
+bool button_with_icon(const char *iconTex, const char *text, ImVec2 iconSize = ImVec2((float) 15, (float) 15),
+                      float spacing = 6.0f, ImVec2 padding = ImVec2((float) 16, (float) 10),
                       ImU32 buttonColor = IM_COL32(51, 153, 204, 255), ImU32 hoverColor = IM_COL32(56, 168, 224, 255));
