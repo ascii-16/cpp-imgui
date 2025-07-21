@@ -5,14 +5,19 @@
 #include "storage.hpp"
 #include "uuid.hpp"
 #include "image.hpp"
+#include "mode.hpp"
 
+#define DARK_GRAY ImVec4(0.08f, 0.08f, 0.08f, 0.95f)
+#define LIGHT_GRAY ImVec4(0.85f, 0.85f, 0.85f, 0.95f)
+#define DARK_INPUT_BG ImVec4(0.12f, 0.12f, 0.12f, 1.0f)
+#define LIGHT_INPUT_BG ImVec4(0.9f, 0.9f, 0.9f, 1.0f)
 
 void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuffer, ImVec4 &color) {
     static bool isTitleEmpty = false;
 
     ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 12.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
-    ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.08f, 0.08f, 0.08f, 0.95f));
+    ImGui::PushStyleColor(ImGuiCol_ChildBg, isDarkMode() ? DARK_GRAY : LIGHT_GRAY);
     ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.2f, 0.2f, 0.2f, 0.5f));
 
     ImGui::BeginChild("AddTaskForm", ImVec2(0, 370), true, ImGuiWindowFlags_NoScrollbar);
@@ -23,7 +28,7 @@ void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuf
 
     ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 8.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(12, 10));
-    ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0.12f, 0.12f, 0.12f, 1.0f));
+    ImGui::PushStyleColor(ImGuiCol_FrameBg, isDarkMode() ? DARK_INPUT_BG : LIGHT_INPUT_BG);
     ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(0.15f, 0.15f, 0.15f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_FrameBgActive, ImVec4(0.18f, 0.18f, 0.18f, 1.0f));
 

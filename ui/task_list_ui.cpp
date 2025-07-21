@@ -1,6 +1,10 @@
 #include "ui.hpp"
 #include "storage.hpp"
 #include "image.hpp"
+#include "mode.hpp"
+
+#define WHITE ImVec4(0.0f, 0.0f, 0.0f, 0.0f)
+#define BLACK ImVec4(1.0f, 1.0f, 1.0f, 1.0f)
 
 void delete_button(std::vector<Task> &tasks, std::string task_id) {
     GLuint iconTex = LoadPNGTexture("assets/icons/delete.png");
@@ -95,7 +99,7 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
     static std::unordered_map<std::string, float> cardScaleStates;
 
     ImGui::PushStyleVar(ImGuiStyleVar_ScrollbarSize, 8.0f);
-    ImGui::PushStyleColor(ImGuiCol_ScrollbarBg, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
+    ImGui::PushStyleColor(ImGuiCol_ScrollbarBg, isDarkMode() ? WHITE : BLACK);
 
     ImGui::BeginChild("TaskListRegion", ImGui::GetContentRegionAvail(), false,
                       ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings |
@@ -185,7 +189,8 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
 
         // Title with completion styling
         float titleAlpha = task.completed ? 0.6f : 1.0f;
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, titleAlpha));
+        ImGui::PushStyleColor(ImGuiCol_Text, isDarkMode() ? ImVec4(1.0f, 1.0f, 1.0f, titleAlpha)
+                                                          : ImVec4(0.0f, 0.0f, 0.0f, titleAlpha));
         // Strikethrough effect for completed tasks
         if (task.completed) {
             ImVec2 titlePos = ImGui::GetCursorScreenPos();
@@ -203,7 +208,8 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
 
         // Content with fade effect for completed tasks
         float contentAlpha = task.completed ? 0.5f : 0.8f;
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.9f, 0.9f, 0.9f, contentAlpha));
+        ImGui::PushStyleColor(ImGuiCol_Text, isDarkMode() ? ImVec4(0.9f, 0.9f, 0.9f, contentAlpha)
+                                                          : ImVec4(0.1f, 0.1f, 0.1f, contentAlpha));
         ImGui::TextWrapped("%s", task.content.c_str());
         ImGui::PopStyleColor();
 
