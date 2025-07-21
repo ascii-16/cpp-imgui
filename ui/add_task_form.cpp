@@ -1,9 +1,12 @@
+#include <iostream>
 #include <random>
 #include <sstream>
 #include "ui.hpp"
 #include "storage.hpp"
 #include "uuid.hpp"
 #include "image.hpp"
+
+static bool isTitleEmpty = false;
 
 void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuffer, ImVec4 &color) {
 
@@ -27,6 +30,11 @@ void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuf
     ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1.0f), "Title");
     ImGui::SetNextItemWidth(-1); // Make Full width
     ImGui::InputTextWithHint("##Title", "Enter task title...", titleBuffer, IM_ARRAYSIZE(titleBuffer));
+    if (isTitleEmpty) {
+        ImGui::SetWindowFontScale(0.85f);
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Title is required");
+        ImGui::SetWindowFontScale(1.0f);
+    }
 
     ImGui::Spacing();
 
@@ -69,8 +77,7 @@ void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuf
         // Validation
         if (strlen(titleBuffer) == 0) {
             // Validation failed
-            // TODO: Show validation error messages
-            return;
+            isTitleEmpty = true;
         } else {
             tasks.insert(tasks.begin(), Task{.id = generate_uuid(),
                                              .title = std::string(titleBuffer),
@@ -80,7 +87,7 @@ void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuf
 
             titleBuffer[0] = '\0';
             contentBuffer[0] = '\0';
-
+            isTitleEmpty = false;
             color = ImVec4(0.3f, 0.7f, 0.9f, 1.0f);
 
             save_tasks(tasks, "tasks.json");
