@@ -6,9 +6,9 @@
 #include "uuid.hpp"
 #include "image.hpp"
 
-static bool isTitleEmpty = false;
 
 void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuffer, ImVec4 &color) {
+    static bool isTitleEmpty = false;
 
     ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 12.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
