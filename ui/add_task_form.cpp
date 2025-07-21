@@ -49,9 +49,9 @@ void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuf
     // Color picker
     ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1.0f), "Color Theme");
     ImGui::SetNextItemWidth(120);
+    ImGui::SetWindowFontScale(0.9f);
     ImGui::ColorEdit4("##Color", (float *) &color,
                       ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_AlphaBar);
-
     ImGui::SameLine();
 
     // Show color preview with name
@@ -62,6 +62,7 @@ void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuf
     ImGui::PopStyleColor(3);
     ImGui::PopStyleColor(3);
     ImGui::PopStyleVar(2);
+    ImGui::SetWindowFontScale(1.0f);
     ImGui::Spacing();
     ImGui::Separator();
     ImGui::Spacing();
