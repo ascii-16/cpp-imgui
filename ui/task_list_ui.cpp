@@ -220,7 +220,8 @@ void render_task_list(std::vector<Task> &tasks, float cardWidth, float cardHeigh
         ImGui::SameLine();
 
         float doneAlpha = task.completed ? 0.8f : 0.6f;
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, doneAlpha));
+        ImGui::PushStyleColor(ImGuiCol_Text,
+                              isDarkMode() ? ImVec4(1.0f, 1.0f, 1.0f, doneAlpha) : ImVec4(0.0f, 0.0f, 0.0f, doneAlpha));
         ImGui::Text("Done");
         ImGui::PopStyleColor();
         ImGui::EndGroup();
