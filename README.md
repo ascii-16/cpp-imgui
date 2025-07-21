@@ -14,7 +14,7 @@ A modern C++ GUI application using [Dear ImGui](https://github.com/ocornut/imgui
 
 1. **Clone the repository**:
    ```sh
-   git clone <repo-url>
+   git clone https://github.com/ascii-16/cpp-imgui
    cd cpp-gui
    ```
 
