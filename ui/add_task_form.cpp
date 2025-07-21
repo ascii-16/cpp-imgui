@@ -94,8 +94,6 @@ void add_task_form(std::vector<Task> &tasks, char *titleBuffer, char *contentBuf
             titleBuffer[0] = '\0';
             contentBuffer[0] = '\0';
             isTitleEmpty = false;
-            color = ImVec4(0.3f, 0.7f, 0.9f, 1.0f);
-
             save_tasks(tasks, "tasks.json");
         }
     }
