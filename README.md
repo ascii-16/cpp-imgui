@@ -18,23 +18,28 @@ A modern C++ GUI application using [Dear ImGui](https://github.com/ocornut/imgui
    cd cpp-gui
    ```
 
-2. **Create a build directory:**
+2. **Update the submodules:**
+   ```sh
+   git submodule update --init --recursive
+   ```
+
+4. **Create a build directory:**
    ```sh
    mkdir build
    cd build
    ```
 
-3. **Generate build files with CMake:**
+5. **Generate build files with CMake:**
    ```sh
    cmake ..
    ```
 
-4. **Build the project:**
+6. **Build the project:**
    ```sh
    make
    ```
 
-5. **Run the application:**
+7. **Run the application:**
    ```sh
    ./ImGuiApp
    ```
